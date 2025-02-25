@@ -1,4 +1,4 @@
-package ru.otus.project.services;
+package ru.otus.project.security.services;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -6,8 +6,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import ru.otus.project.dto.UserDto;
-import ru.otus.project.exceptions.UserNotFoundException;
+import ru.otus.project.security.dto.UserDto;
+import ru.otus.project.security.exceptions.UserNotFoundException;
 
 import java.util.List;
 

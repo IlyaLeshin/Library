@@ -1,12 +1,12 @@
-package ru.otus.project.services;
+package ru.otus.project.security.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import ru.otus.project.converters.UserConverter;
-import ru.otus.project.dto.UserDto;
-import ru.otus.project.exceptions.UserNotFoundException;
-import ru.otus.project.repositories.UserRepository;
+import ru.otus.project.security.converters.UserConverter;
+import ru.otus.project.security.dto.UserDto;
+import ru.otus.project.security.exceptions.UserNotFoundException;
+import ru.otus.project.security.repositories.UserRepository;
 
 @RequiredArgsConstructor
 @Service

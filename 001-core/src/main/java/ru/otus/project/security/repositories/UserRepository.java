@@ -1,7 +1,7 @@
-package ru.otus.project.repositories;
+package ru.otus.project.security.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
-import ru.otus.project.models.User;
+import ru.otus.project.security.models.User;
 
 import java.util.Optional;
 

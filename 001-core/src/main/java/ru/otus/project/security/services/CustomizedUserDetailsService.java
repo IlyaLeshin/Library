@@ -1,12 +1,12 @@
-package ru.otus.project.services;
+package ru.otus.project.security.services;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
-import ru.otus.project.dto.UserDto;
-import ru.otus.project.exceptions.UserNotFoundException;
+import ru.otus.project.security.dto.UserDto;
+import ru.otus.project.security.exceptions.UserNotFoundException;
 
 @RequiredArgsConstructor
 @Service

@@ -11,7 +11,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.request.MockHttpServletRequestBuilder;
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
-import ru.otus.project.config.SecurityConfig;
+import ru.otus.project.security.config.SecurityConfig;
 
 import java.util.Map;
 import java.util.Objects;

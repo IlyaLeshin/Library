@@ -1,4 +1,4 @@
-package ru.otus.project.dto;
+package ru.otus.project.security.dto;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;

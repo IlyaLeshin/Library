@@ -1,12 +1,12 @@
-package ru.otus.project.converters;
+package ru.otus.project.security.converters;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.otus.project.dto.UserDto;
-import ru.otus.project.models.Role;
-import ru.otus.project.models.User;
+import ru.otus.project.security.dto.UserDto;
+import ru.otus.project.security.models.Role;
+import ru.otus.project.security.models.User;
 
 import java.util.Set;
 

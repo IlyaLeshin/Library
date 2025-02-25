@@ -1,10 +1,10 @@
-package ru.otus.project.converters;
+package ru.otus.project.security.converters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.otus.project.dto.UserDto;
-import ru.otus.project.models.Role;
-import ru.otus.project.models.User;
+import ru.otus.project.security.dto.UserDto;
+import ru.otus.project.security.models.Role;
+import ru.otus.project.security.models.User;
 
 @RequiredArgsConstructor
 @Component

@@ -1,15 +1,15 @@
-package ru.otus.project.services;
+package ru.otus.project.security.services;
 
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import ru.otus.project.converters.UserConverter;
-import ru.otus.project.dto.UserDto;
-import ru.otus.project.models.Role;
-import ru.otus.project.models.User;
-import ru.otus.project.repositories.UserRepository;
+import ru.otus.project.security.converters.UserConverter;
+import ru.otus.project.security.dto.UserDto;
+import ru.otus.project.security.models.Role;
+import ru.otus.project.security.models.User;
+import ru.otus.project.security.repositories.UserRepository;
 
 import java.util.List;
 import java.util.Optional;

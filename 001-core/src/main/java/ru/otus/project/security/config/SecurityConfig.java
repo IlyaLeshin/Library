@@ -1,4 +1,4 @@
-package ru.otus.project.config;
+package ru.otus.project.security.config;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.context.annotation.Bean;
