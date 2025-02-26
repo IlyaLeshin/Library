@@ -2,34 +2,36 @@ package ru.otus.project.models;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
 import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
+import jakarta.persistence.MapsId;
+import jakarta.persistence.OneToMany;
+import jakarta.persistence.OneToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.Set;
+
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-
 @Entity
-@Table(name = "comments")
-public class Comment {
+@Table(name = "book_ratings")
+public class BookRating {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
+    @Column(name = "book_id")
     private long id;
 
-    @Column(name = "text")
-    private String text;
+    @OneToMany
+    private Set<UserBookRating> userBookRatings;
 
-    @ManyToOne
+    @OneToOne
+    @MapsId
     @JoinColumn(name = "book_id")
     private Book book;
+
 }
