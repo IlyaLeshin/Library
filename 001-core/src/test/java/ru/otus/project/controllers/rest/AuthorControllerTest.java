@@ -8,7 +8,7 @@ import org.springframework.boot.autoconfigure.security.servlet.SecurityAutoConfi
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.otus.project.dto.AuthorDto;
+import ru.otus.project.dto.author.AuthorDto;
 import ru.otus.project.services.AuthorService;
 
 import java.util.List;

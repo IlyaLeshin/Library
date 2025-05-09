@@ -1,9 +1,9 @@
 package ru.otus.project.services;
 
-import ru.otus.project.dto.BookCreateDto;
-import ru.otus.project.dto.BookDto;
-import ru.otus.project.dto.BookUpdateDto;
-import ru.otus.project.dto.BookWithCommentsDto;
+import ru.otus.project.dto.book.BookCreateDto;
+import ru.otus.project.dto.book.BookDto;
+import ru.otus.project.dto.book.BookUpdateDto;
+import ru.otus.project.dto.book.BookWithCommentsDto;
 
 import java.util.List;
 

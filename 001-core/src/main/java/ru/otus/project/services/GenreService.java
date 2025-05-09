@@ -1,6 +1,6 @@
 package ru.otus.project.services;
 
-import ru.otus.project.dto.GenreDto;
+import ru.otus.project.dto.genre.GenreDto;
 
 import java.util.List;
 

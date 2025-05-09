@@ -1,5 +1,6 @@
-package ru.otus.project.dto;
+package ru.otus.project.dto.book.rating;
 
+import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,8 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class GenreDto {
-    private long id;
+public class TotalBookRatingUpdateDto {
 
-    private String name;
+    @NotNull
+    private Long bookId;
 }

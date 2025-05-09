@@ -1,17 +1,11 @@
 package ru.otus.project.models;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import ru.otus.project.listeners.UserBookRatingListener;
 import ru.otus.project.security.models.User;
 
 @Getter
@@ -19,21 +13,22 @@ import ru.otus.project.security.models.User;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@EntityListeners(UserBookRatingListener.class)
 @Table(name = "user_book_ratings")
 public class UserBookRating {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
-    private long id;
+    @EmbeddedId
+    private UserBookRatingId userBookRatingId;
 
     @Column(name = "rating")
-    private double rating;
+    private int rating;
 
-    @ManyToOne
-    @JoinColumn(name = "book_id")
-    private Book book;
-
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("userId")
     @JoinColumn(name = "user_id")
     private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @MapsId("bookId")
+    @JoinColumn(name = "book_id")
+    private Book book;
 }

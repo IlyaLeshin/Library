@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.otus.project.converters.GenreConverter;
-import ru.otus.project.dto.GenreDto;
+import ru.otus.project.dto.genre.GenreDto;
 import ru.otus.project.models.Genre;
 import ru.otus.project.repositories.GenreRepository;
 

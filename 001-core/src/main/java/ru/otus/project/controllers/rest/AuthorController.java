@@ -3,7 +3,7 @@ package ru.otus.project.controllers.rest;
 import lombok.AllArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
-import ru.otus.project.dto.AuthorDto;
+import ru.otus.project.dto.author.AuthorDto;
 import ru.otus.project.services.AuthorService;
 
 

@@ -2,8 +2,8 @@ package ru.otus.project.converters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.otus.project.dto.CommentDto;
-import ru.otus.project.dto.CommentUpdateDto;
+import ru.otus.project.dto.comment.CommentDto;
+import ru.otus.project.dto.comment.CommentUpdateDto;
 import ru.otus.project.models.Comment;
 
 @RequiredArgsConstructor

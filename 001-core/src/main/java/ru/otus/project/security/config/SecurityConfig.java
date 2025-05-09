@@ -23,9 +23,9 @@ public class SecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .sessionManagement((session) -> session.sessionCreationPolicy(SessionCreationPolicy.ALWAYS))
                 .authorizeHttpRequests(authorize -> authorize
-                        .requestMatchers("/login", "/", "/error", "/public/**").permitAll()
+                        .requestMatchers("/login", "/", "/error", "/public/**","/static/**").permitAll()
                         .requestMatchers("/books/creation-form", "/books/*/editing-form").hasAuthority("ROLE_ADMIN")
-                        .requestMatchers("/books/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
+                        .requestMatchers("/books/**", "/users/**","api/v1/users/**").hasAnyAuthority("ROLE_ADMIN", "ROLE_USER")
                         .requestMatchers(HttpMethod.GET, "/api/v1/authors").hasAuthority("ROLE_CAN_READ_AUTHORS")
                         .requestMatchers(HttpMethod.GET, "/api/v1/genres").hasAuthority("ROLE_CAN_READ_GENRES")
                         .requestMatchers("/api/v1/books/*/comments/**").hasAuthority("ROLE_CAN_EDIT_COMMENTS")

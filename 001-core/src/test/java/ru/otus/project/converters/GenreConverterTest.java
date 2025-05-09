@@ -5,7 +5,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
-import ru.otus.project.dto.GenreDto;
+import ru.otus.project.dto.genre.GenreDto;
 import ru.otus.project.models.Genre;
 
 import static org.assertj.core.api.Assertions.assertThat;

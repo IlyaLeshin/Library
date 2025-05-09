@@ -1,4 +1,4 @@
-package ru.otus.project.dto;
+package ru.otus.project.dto.book;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;

@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import ru.otus.project.converters.AuthorConverter;
-import ru.otus.project.dto.AuthorDto;
+import ru.otus.project.dto.author.AuthorDto;
 import ru.otus.project.models.Author;
 import ru.otus.project.repositories.AuthorRepository;
 

@@ -9,9 +9,9 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
 import org.springframework.test.web.servlet.MockMvc;
-import ru.otus.project.dto.CommentCreateDto;
-import ru.otus.project.dto.CommentDto;
-import ru.otus.project.dto.CommentUpdateDto;
+import ru.otus.project.dto.comment.CommentCreateDto;
+import ru.otus.project.dto.comment.CommentDto;
+import ru.otus.project.dto.comment.CommentUpdateDto;
 import ru.otus.project.services.CommentService;
 
 import static org.mockito.Mockito.*;

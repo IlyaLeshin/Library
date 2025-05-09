@@ -3,7 +3,7 @@ package ru.otus.project.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.project.converters.AuthorConverter;
-import ru.otus.project.dto.AuthorDto;
+import ru.otus.project.dto.author.AuthorDto;
 import ru.otus.project.repositories.AuthorRepository;
 
 import java.util.List;

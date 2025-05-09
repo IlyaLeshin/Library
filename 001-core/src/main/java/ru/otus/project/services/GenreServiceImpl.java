@@ -3,7 +3,7 @@ package ru.otus.project.services;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import ru.otus.project.converters.GenreConverter;
-import ru.otus.project.dto.GenreDto;
+import ru.otus.project.dto.genre.GenreDto;
 import ru.otus.project.repositories.GenreRepository;
 
 import java.util.List;

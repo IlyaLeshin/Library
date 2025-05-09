@@ -47,6 +47,7 @@
 <script th:inline="javascript">
     window.onload = () => {
       getBookList();
+      getUserProfileLink();
     }
     function getBookList() {
         fetch('/api/v1/books', {
@@ -98,10 +99,38 @@
         .then(response => location.reload())
         .catch(error => alert("Ошибка" + error));
     }
+
+        function getUserProfileLink() {
+        const username = [[${#authentication.name}]]
+        fetch("/api/v1/users/" + username, {
+            method: 'GET',
+           headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then((user) => {
+            return user.id;
+            })
+        .then(userId => {
+        let userProfileLinkBody = "";
+        userProfileLinkBody = `
+                             </a>
+                              <a href="/users/${userId}"  type="button">
+                              <button type="button">[[#{user-profile-link}]]</button>
+                              </a>
+
+            `;
+        document.getElementById("user-profile-link-body").innerHTML = userProfileLinkBody;
+           })
+           .catch(error => alert("Ошибка" + error));
+        }
 </script>
 
 </head>
 <body>
+<a id="user-profile-link-body"></a>
+
 <h3 th:text="#{books-table-header}">Books:</h3>
 
 <table class="books" id="books-table">

@@ -11,10 +11,10 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ru.otus.project.dto.BookCreateDto;
-import ru.otus.project.dto.BookDto;
-import ru.otus.project.dto.BookUpdateDto;
-import ru.otus.project.dto.BookWithCommentsDto;
+import ru.otus.project.dto.book.BookCreateDto;
+import ru.otus.project.dto.book.BookDto;
+import ru.otus.project.dto.book.BookUpdateDto;
+import ru.otus.project.dto.book.BookWithCommentsDto;
 import ru.otus.project.services.BookService;
 
 import java.util.List;

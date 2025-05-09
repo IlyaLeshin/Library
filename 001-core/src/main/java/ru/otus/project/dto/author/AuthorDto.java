@@ -1,4 +1,4 @@
-package ru.otus.project.dto;
+package ru.otus.project.dto.author;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -6,21 +6,13 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class BookWithCommentsDto {
+public class AuthorDto {
     private long id;
 
-    private String title;
-
-    private AuthorDto authorDto;
-
-    private List<GenreDto> genreDtoList;
-
-    private List<CommentDto> commentDtoList;
+    private String fullName;
 }

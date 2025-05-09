@@ -11,9 +11,9 @@ import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
-import ru.otus.project.dto.CommentCreateDto;
-import ru.otus.project.dto.CommentDto;
-import ru.otus.project.dto.CommentUpdateDto;
+import ru.otus.project.dto.comment.CommentCreateDto;
+import ru.otus.project.dto.comment.CommentDto;
+import ru.otus.project.dto.comment.CommentUpdateDto;
 import ru.otus.project.services.CommentService;
 
 @RestController

@@ -2,7 +2,7 @@ package ru.otus.project.converters;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
-import ru.otus.project.dto.BookWithCommentsDto;
+import ru.otus.project.dto.book.BookWithCommentsDto;
 import ru.otus.project.models.Book;
 
 @RequiredArgsConstructor

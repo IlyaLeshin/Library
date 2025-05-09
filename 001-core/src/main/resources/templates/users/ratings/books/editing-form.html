@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Edit book</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        label {
+            display: inline-block;
+            width: 100px;
+        }
+
+        input:read-only {
+            background: lightgray;
+        }
+
+        .row {
+            margin-top: 10px;
+        }
+
+        h3 {
+            background-image: url("../static/public/listmark.png");
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+        .errors {
+            color: red;
+        }
+    </style>
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/public/listmark.png}]]);
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+    </style>
+</head>
+<body>
+<h3 th:text="#{user-book-rating-form-header}">User book rating:</h3>
+
+    <h3 th:text="#{user-book-rating-edit-form-header}">Edit User's book rating rating:</h3>
+
+    <div class="row">
+        <label for="user-book-rating-user-id-input" th:text="#{user-book-rating-field-user-id}">User ID:</label>
+        <input id="user-book-rating-user-id-input" type="text" name="userId" readonly="readonly" value="1" th:value="${userId}"/>
+    </div>
+
+    <div class="row">
+        <label for="user-book-rating-book-id-input" th:text="#{user-book-rating-field-book-id}">Book ID:</label>
+        <input id="user-book-rating-book-id-input" type="text" name="bookId" readonly="readonly" value="1" th:value="${bookId}"/>
+    </div>
+
+    <div class="row">
+        <label for="user-book-rating-rating-input" th:text="#{user-book-rating-field-rating}">Text:</label>
+        <input required id="user-book-rating-rating-input" name="text" type="text"/>
+    </div>
+
+    <div class="row">
+        <button th:text="#{save-button-caption}" type="submit" onclick="saveUserBookRating()">Save</button>
+        <a href="book-with-comments.html" th:href="@{/books/__${bookId}__}">
+            <button th:text="#{cancel-button-caption}" type="button">Cancel</button>
+        </a>
+    </div>
+
+<script>
+
+    function saveUserBookRating() {
+        const userId = document.getElementById("user-book-rating-user-id-input")
+        const bookId = document.getElementById("user-book-rating-book-id-input")
+        const rating = document.getElementById("user-book-rating-rating-input")
+
+        let userBookRatingJson = {userId: userId.value, bookId: bookId.value, rating: rating.value, }
+
+        fetch("/api/v1/users/" + userId.value + "ratings/books/" + bookId.value, {
+            method: 'PUT',
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(userBookRatingJson)
+        })
+        .then(rawResponse => rawResponse.json())
+        .then(response => location.href = location.href = "/books/" + bookId.value)
+        .catch(error => alert("Ошибка" + error))
+    }
+
+</script>
+</body>
+</html>

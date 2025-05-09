@@ -1,8 +1,8 @@
 package ru.otus.project.services;
 
-import ru.otus.project.dto.CommentCreateDto;
-import ru.otus.project.dto.CommentDto;
-import ru.otus.project.dto.CommentUpdateDto;
+import ru.otus.project.dto.comment.CommentCreateDto;
+import ru.otus.project.dto.comment.CommentDto;
+import ru.otus.project.dto.comment.CommentUpdateDto;
 
 import java.util.List;
 

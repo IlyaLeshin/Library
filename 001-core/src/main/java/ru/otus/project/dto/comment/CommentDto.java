@@ -1,4 +1,4 @@
-package ru.otus.project.dto;
+package ru.otus.project.dto.comment;
 
 import lombok.AllArgsConstructor;
 import lombok.EqualsAndHashCode;
@@ -11,8 +11,10 @@ import lombok.Setter;
 @AllArgsConstructor
 @NoArgsConstructor
 @EqualsAndHashCode
-public class AuthorDto {
+public class CommentDto {
     private long id;
 
-    private String fullName;
+    private String text;
+
+    private Long bookId;
 }

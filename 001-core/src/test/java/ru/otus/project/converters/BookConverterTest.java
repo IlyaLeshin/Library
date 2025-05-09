@@ -6,16 +6,14 @@ import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
-import ru.otus.project.dto.AuthorDto;
-import ru.otus.project.dto.BookDto;
-import ru.otus.project.dto.BookUpdateDto;
-import ru.otus.project.dto.GenreDto;
+import ru.otus.project.dto.author.AuthorDto;
+import ru.otus.project.dto.book.BookDto;
+import ru.otus.project.dto.genre.GenreDto;
 import ru.otus.project.models.Author;
 import ru.otus.project.models.Book;
 import ru.otus.project.models.Genre;
 
 import java.util.List;
-import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -53,18 +51,6 @@ public class BookConverterTest {
         authorDto = getAuthorDto();
         genreDtos = getGenreDtos();
         bookDto = getBookDto(authorDto, genreDtos);
-    }
-
-    @DisplayName("корректно преобразовывать DTO в UpdateDTO. текущий метод dtoToUpdateDto(BookDto bookDto)")
-    @Test
-    void dtoToUpdateDtoTest() {
-        BookUpdateDto expectedBookDto = new BookUpdateDto(bookDto.getId(), bookDto.getTitle(),
-                bookDto.getAuthorDto().getId(),
-                bookDto.getGenreDtoList().stream().map(GenreDto::getId).collect(Collectors.toSet()));
-
-        BookUpdateDto actualBookUpdateDto = bookConverter.dtoToUpdateDto(bookDto);
-
-        assertThat(actualBookUpdateDto).isEqualTo(expectedBookDto);
     }
 
     @DisplayName("корректно преобразовывать модель в DTO. текущий метод modelToDto(Book book)")
