@@ -77,7 +77,7 @@
 
         let userBookRatingJson = {userId: userId.value, bookId: bookId.value, rating: rating.value, }
 
-        fetch("/api/v1/users/" + userId.value + "ratings/books/" + bookId.value, {
+        fetch("/api/v1/users/" + userId.value + "/ratings/books/" + bookId.value, {
             method: 'PUT',
             headers: {
                 'Accept': 'application/json',

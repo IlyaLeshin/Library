@@ -52,11 +52,13 @@ public class UserFavoriteBookServiceImpl implements UserFavoriteBookService {
     }
 
     @Override
+    @Transactional
     public void deleteByUserIdAndBookId(long userId, long bookId) {
         userFavoriteBookRepository.deleteByUserIdAndBookId(userId, bookId);
     }
 
     @Override
+    @Transactional
     public void deleteAllByUserId(long userId) {
         userFavoriteBookRepository.deleteAllByUserId(userId);
     }

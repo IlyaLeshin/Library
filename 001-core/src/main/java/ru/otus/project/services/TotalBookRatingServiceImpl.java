@@ -48,13 +48,13 @@ public class TotalBookRatingServiceImpl implements TotalBookRatingService {
 
         var userBookRatings = userBookRatingRepository.findAllByBookId(bookId);
 
-        double averageBookRating = averageBookRating(userBookRatings);
+        double averageBookRating = calculateAverageBookRating(userBookRatings);
 
         var totalBookRating = new TotalBookRating(bookId, averageBookRating, userBookRatings, book);
         return ratingConverter.modelToDto(totalBookRatingRepository.save(totalBookRating));
     }
 
-    private double averageBookRating(List<UserBookRating> userBookRatings) {
+    private double calculateAverageBookRating(List<UserBookRating> userBookRatings) {
         return userBookRatings.stream().map(UserBookRating::getRating).mapToDouble(r -> r).average().orElse(0.0);
 
     }

@@ -53,6 +53,7 @@ public class UserBookRatingServiceImpl implements UserBookRatingService {
     }
 
     @Override
+    @Transactional
     public void deleteByUserIdAndBookId(long userId, long bookId) {
         ratingRepository.deleteByUserIdAndBookId(userId, bookId);
     }

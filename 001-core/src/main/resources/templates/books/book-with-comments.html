@@ -135,7 +135,7 @@
 </a>
 
 <div class="row">
-    <button th:text="#{save-favorite-button-caption}" type="button" onclick="saveUserFavoriteBook()">Add book to favorites</button>
+    <button th:text="#{add-to-favorites-button-caption}" type="button" onclick="saveUserFavoriteBook()">Add book to favorites</button>
 </div>
 </body>
 
@@ -143,7 +143,7 @@
     window.onload = () => {
            getBookWithComments();
            getTotalBookRating();
-           getUserBookRatingAndLinkToAddToFavorites();
+           getUserBookRating();
        }
 
     function getBookWithComments() {
@@ -248,7 +248,7 @@
     }
 
 
-    function getUserBookRatingAndLinkToAddToFavorites() {
+    function getUserBookRating() {
         const bookId=[[${bookId}]];
         const username = [[${#authentication.name}]]
         fetch("/api/v1/users/" + username, {
@@ -293,15 +293,6 @@
             `;
             document.getElementById("user-book-rating-table-body").innerHTML = userBookRatingBody;
             document.getElementById("user-book-rating-create-link").innerHTML = userBookRatingCreateLinkBody;
-
-                 let userFavoriteBookCreateLinkBody = `
-                <br/>
-                <a href="/users/{userId}/favorites/books/{bookId}/editing-form">
-                                  <button type="button">[[#{edit-button-caption}]]</button>
-                              </a>
-                <br/>
-            `;
-            document.getElementById("user-favorite-book-create-link").innerHTML = userFavoriteBookCreateLinkBody;
         })
         .catch(error => alert("Ошибка" + error));
     }
@@ -319,7 +310,7 @@
         .then((user) => {
             const userId = user.id;
                     let bookJson={userId: userId, bookId: bookId}
-            return fetch("/api/v1/users" + userId +"/favorites/books/" + bookId), {
+            return fetch("/api/v1/users/" + userId +"/favorites/books/" + bookId, {
             method: 'POST',
             headers: {
                 'Accept': 'application/json',
@@ -327,13 +318,14 @@
             },
             body: JSON.stringify(bookJson)
         })
+        })
         .then(rawResponse => rawResponse.json())
-        .then(response => location.href = "/books/" + bookId))
+        .then(response => location.href = "/books/" + bookId)
         .catch(error => alert("Ошибка" + error));
     }
 
         function deleteUserBookRating(userId, bookId) {
-        fetch("/api/v1/users/" + userId + "/ratings/books" + bookId, {
+        fetch("/api/v1/users/" + userId + "/ratings/books/" + bookId, {
             method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
