@@ -61,6 +61,8 @@
 
 </head>
 <body>
+<a id="user-profile-link-body"></a>
+<br/>
 <h3 th:text="#{book-table-header}">Book:</h3>
 
 <table class="book">
@@ -119,6 +121,7 @@
     <tbody id="user-book-rating-table-body">
     </tbody>
 </table>
+
 <br/>
 <a id="user-book-rating-create-link"></a>
 <br/>
@@ -144,7 +147,46 @@
            getBookWithComments();
            getTotalBookRating();
            getUserBookRating();
+           getUserProfileLink();
        }
+
+    function getUserProfileLink() {
+        const username = [[${#authentication.name}]]
+        fetch("/api/v1/users/" + username, {
+            method: 'GET',
+           headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(response => response.json())
+        .then((user) => {
+            return user.id;
+            })
+        .then(userId => {
+        let userProfileLinkBody = "";
+        userProfileLinkBody = `
+                             </a>
+                              <a href="/users/${userId}"  type="button">
+                              <button type="button">[[#{user-profile-link}]]</button>
+                              </a>
+
+            `;
+        document.getElementById("user-profile-link-body").innerHTML = userProfileLinkBody;
+
+         let userBookRatingCreateLinkBody = `
+                <br/>
+                <a href="/users/${userId}/ratings/books/[[${bookId}]]/editing-form">
+                                  <button type="button">[[#{rate-book-button-caption}]]</button>
+                              </a>
+                <br/>
+            `;
+
+            document.getElementById("user-book-rating-create-link").innerHTML = userBookRatingCreateLinkBody;
+
+
+           })
+           .catch(error => alert("Ошибка" + error));
+        }
 
     function getBookWithComments() {
         const bookId=[[${bookId}]];
@@ -284,15 +326,8 @@
                            </tr>
             `;
 
-            let userBookRatingCreateLinkBody = `
-                <br/>
-                <a href="/users/${userBookRating.userId}/ratings/books/${userBookRating.bookId}/editing-form">
-                                  <button type="button">[[#{edit-button-caption}]]</button>
-                              </a>
-                <br/>
-            `;
             document.getElementById("user-book-rating-table-body").innerHTML = userBookRatingBody;
-            document.getElementById("user-book-rating-create-link").innerHTML = userBookRatingCreateLinkBody;
+
         })
         .catch(error => alert("Ошибка" + error));
     }

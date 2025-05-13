@@ -129,6 +129,9 @@
                 bookList += `<tr>
                              <td>${book.bookId} </td>
                              <td>
+                             <a href="/books/${book.bookId}">
+                             <button type="button">[[#{book-info-button-caption}]]</button>
+                             </a>
                             <button type="button" onclick="deleteUserFavoriteBook(${book.userId}, ${book.bookId})"> [[#{delete-button-caption}]]</button>
                             </td>
                             </tr>
