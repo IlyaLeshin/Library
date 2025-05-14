@@ -101,11 +101,10 @@
     }
 
     function getUser() {
-        const username = [[${#authentication.name}]]
 
         let userBody = `<tr>
                         <td>[[${userId}]]</td>
-                        <td>username</td>
+                        <td>[[${#authentication.name}]]</td>
                     </tr>`;
 
         document.getElementById("user-table-body").innerHTML = userBody;

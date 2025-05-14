@@ -19,7 +19,7 @@ public class UserController {
 
     @GetMapping("/api/v1/users/{username}")
     @ResponseStatus(HttpStatus.OK)
-    public ResponseUserDto getListUserBookRating(@PathVariable("username") String username) {
+    public ResponseUserDto getUserId(@PathVariable("username") String username) {
         return userConverter.dtoToResponseDto(service.findByUsername(username));
     }
 }

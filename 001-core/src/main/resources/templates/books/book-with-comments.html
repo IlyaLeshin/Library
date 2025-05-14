@@ -64,7 +64,9 @@
 <a id="user-profile-link-body"></a>
 <br/>
 <h3 th:text="#{book-table-header}">Book:</h3>
-
+<div class="row">
+    <button th:text="#{add-to-favorites-button-caption}" type="button" onclick="saveUserFavoriteBook()">Add book to favorites</button>
+</div>
 <table class="book">
     <thead>
     <tr>
@@ -107,6 +109,10 @@
     </tbody>
 </table>
 
+<div class="row">
+    <button th:text="#{update-total-book-rating-button-caption}" type="button" onclick="updateTotalBookRating()">Press to update total book rating</button>
+</div>
+
 <h4 th:text="#{user-book-rating-header}">User's book rating:</h4>
 <table class="user-book-rating">
     <thead>
@@ -114,7 +120,6 @@
         <th th:text="#{user-book-rating-field-user-id}">User ID</th>
         <th th:text="#{user-book-rating-field-book-id}">Book ID</th>
         <th th:text="#{user-book-rating-field-rating}">Average rating</th>
-        <th th:text="#{user-book-rating-table-column-action}">Action</th>
     </tr>
     </thead>
 
@@ -137,17 +142,15 @@
     <button th:text="#{return-to-index-page-button-caption}">Return to index page</button>
 </a>
 
-<div class="row">
-    <button th:text="#{add-to-favorites-button-caption}" type="button" onclick="saveUserFavoriteBook()">Add book to favorites</button>
-</div>
+
 </body>
 
 <script th:inline="javascript">
     window.onload = () => {
            getBookWithComments();
            getTotalBookRating();
-           getUserBookRating();
            getUserProfileLink();
+           getUserBookRatings();
        }
 
     function getUserProfileLink() {
@@ -290,42 +293,30 @@
     }
 
 
-    function getUserBookRating() {
+    function getUserBookRatings() {
         const bookId=[[${bookId}]];
-        const username = [[${#authentication.name}]]
-        fetch("/api/v1/users/" + username, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        })
-        .then(response => response.json())
-        .then((user) => {
-            const userId = user.id;
-            return fetch('/api/v1/users/' + userId + '/ratings/books/' + bookId, {
+
+        fetch('/api/v1/books/' + bookId + '/rating', {
             method: "GET",
             headers: {
                 "Content-Type": "application/json"
             }
         })
-        })
         .then(response => response.json())
-        .then((userBookRating) => {
-            let userBookRatingBody = "";
+        .then((totalBookRating) => {
 
-            userBookRatingBody = `<tr>
+        const userBookRatingDto = totalBookRating.userBookRatings
+        let userBookRatingBody = "";
+
+        userBookRatingDto.forEach((userBookRating) => {
+
+            userBookRatingBody += `<tr>
                            <td>${userBookRating.userId}</td>
                            <td>${userBookRating.bookId}</td>
                            <td>${userBookRating.rating}</td>
-                           <td>
-                              <a href="/users/${userBookRating.userId}/ratings/books/${userBookRating.bookId}/editing-form">
-                                  <button type="button">[[#{edit-button-caption}]]</button>
-                              </a>
-                              <button type="button" onclick="deleteUserBookRating(${userBookRating.userId},${userBookRating.bookId})"> [[#{delete-button-caption}]]</button>
-                           </td>
                            </tr>
             `;
-
+        })
             document.getElementById("user-book-rating-table-body").innerHTML = userBookRatingBody;
 
         })
@@ -369,5 +360,21 @@
         .then(response => location.reload())
         .catch(error => alert("Ошибка" + error));
     }
+
+    function updateTotalBookRating() {
+          const bookId=[[${bookId}]];
+          let bookRatingJson={bookId: bookId}
+        fetch("/api/v1/books/" + bookId + "/rating", {
+            method: 'PUT',
+             headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bookRatingJson)
+        })
+        .then(rawResponse => rawResponse.json())
+        .then(response => location.reload())
+        .catch(error => alert("Ошибка" + error));
+        }
 </script>
 </html>
