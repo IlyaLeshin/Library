@@ -5,7 +5,6 @@ import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import ru.otus.project.listeners.UserBookRatingListener;
 import ru.otus.project.security.models.User;
 
 @Getter
@@ -13,7 +12,6 @@ import ru.otus.project.security.models.User;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@EntityListeners(UserBookRatingListener.class)
 @Table(name = "user_book_ratings")
 public class UserBookRating {
     @EmbeddedId
