@@ -17,7 +17,7 @@ import lombok.Setter;
 import org.hibernate.annotations.Fetch;
 import org.hibernate.annotations.FetchMode;
 
-import java.util.List;
+import java.util.Set;
 
 @Getter
 @Setter
@@ -38,7 +38,7 @@ public class TotalBookRating {
     @JoinTable(name = "total_book_ratings_user_book_ratings", joinColumns = @JoinColumn(name = "id"),
             inverseJoinColumns = {@JoinColumn(name = "user_id"),
                     @JoinColumn(name = "book_id")})
-    private List<UserBookRating> userBookRatings;
+    private Set<UserBookRating> userBookRatings;
 
     @OneToOne(fetch = FetchType.LAZY)
     @MapsId

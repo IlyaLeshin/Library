@@ -14,7 +14,7 @@ import ru.otus.project.repositories.BookRepository;
 import ru.otus.project.repositories.TotalBookRatingRepository;
 import ru.otus.project.repositories.UserBookRatingRepository;
 
-import java.util.List;
+import java.util.Set;
 
 @Service
 @RequiredArgsConstructor
@@ -54,8 +54,10 @@ public class TotalBookRatingServiceImpl implements TotalBookRatingService {
         return ratingConverter.modelToDto(totalBookRatingRepository.save(totalBookRating));
     }
 
-    private double calculateAverageBookRating(List<UserBookRating> userBookRatings) {
-        return userBookRatings.stream().map(UserBookRating::getRating).mapToDouble(r -> r).average().orElse(0.0);
-
+    private double calculateAverageBookRating(Set<UserBookRating> userBookRatings) {
+        if (userBookRatings!=null) {
+            return userBookRatings.stream().map(UserBookRating::getRating).mapToDouble(r -> r).average().orElse(0.0);
+        }
+        return 0.0;
     }
 }

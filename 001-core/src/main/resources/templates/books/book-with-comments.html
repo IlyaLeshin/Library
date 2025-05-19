@@ -152,6 +152,21 @@
            getUserProfileLink();
            getUserBookRatings();
        }
+    function updateTotalBookRating() {
+          const bookId=[[${bookId}]];
+          let bookRatingJson={bookId: bookId}
+        fetch("/api/v1/books/" + bookId + "/rating", {
+            method: 'PUT',
+             headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(bookRatingJson)
+        })
+        .then(rawResponse => rawResponse.json())
+        .then(response => location.reload())
+        .catch(error => alert("Ошибка" + error));
+        }
 
     function getUserProfileLink() {
         const username = [[${#authentication.name}]]
@@ -360,21 +375,5 @@
         .then(response => location.reload())
         .catch(error => alert("Ошибка" + error));
     }
-
-    function updateTotalBookRating() {
-          const bookId=[[${bookId}]];
-          let bookRatingJson={bookId: bookId}
-        fetch("/api/v1/books/" + bookId + "/rating", {
-            method: 'PUT',
-             headers: {
-                'Accept': 'application/json',
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(bookRatingJson)
-        })
-        .then(rawResponse => rawResponse.json())
-        .then(response => location.reload())
-        .catch(error => alert("Ошибка" + error));
-        }
 </script>
 </html>
