@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Library</title>
+    <style type="text/css">
+        body {
+            padding: 50px;
+        }
+
+        .comment {
+            border: 1px solid steelblue;
+            width: 300px;
+            border-collapse: collapse;
+        }
+
+        .comment tr td, th {
+            padding: 5px;
+            border: 1px solid steelblue;
+        }
+
+        .comment td:last-child, td:first-child {
+            width: 50px;
+        }
+
+        h3 {
+            background-image: url("../static/listmark.png");
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+
+    </style>
+    <style type="text/css" th:inline="text">
+        [[h3]] {
+            background-image: url([[@{/listmark.png}]]);
+            background-repeat: no-repeat;
+            padding: 2px;
+            padding-left: 30px;
+        }
+    </style>
+</head>
+<body>
+<h3 th:text="#{user-table-header}">User:</h3>
+
+<table class="user">
+    <thead>
+    <tr>
+        <th th:text="#{user-field-id}">ID</th>
+        <th th:text="#{user-field-username}">Username</th>
+    </tr>
+    </thead>
+
+    <tbody id="user-table-body">
+    </tbody>
+</table>
+<br/>
+
+<h4 th:text="#{user-favorite-books-table-header}">User's book ratings:</h4>
+<table class="user-favorite-books">
+    <thead>
+    <tr>
+        <th th:text="#{user-favorite-books-field-book-id}">Book ID</th>
+        <th th:text="#{user-favorite-books-table-column-action}">Action</th>
+    </tr>
+    </thead>
+
+    <tbody id="user-favorite-books-body">
+    </tbody>
+</table>
+<br/>
+
+<h4 th:text="#{user-book-ratings-table-header}">User's book ratings:</h4>
+<table class="user-book-ratings">
+    <thead>
+    <tr>
+        <th th:text="#{user-book-ratings-field-book-id}">Book ID</th>
+        <th th:text="#{user-book-ratings-field-rating}">Average rating</th>
+        <th th:text="#{user-book-ratings-table-column-action}">Action</th>
+    </tr>
+    </thead>
+
+    <tbody id="user-book-ratings-body">
+    </tbody>
+</table>
+<br/>
+
+<a href="books.html" th:href="@{/books}">
+    <button th:text="#{return-to-books-page-button-caption}" type="button">Return to books list page</button>
+</a>
+<br/>
+<a href="../index.html" th:href="@{/}" type="button">
+    <button th:text="#{return-to-index-page-button-caption}">Return to index page</button>
+</a>
+</body>
+<script th:inline="javascript">
+    window.onload = () => {
+        getUser();
+        getUserBookRatings();
+        getUserFavoriteBooks();
+    }
+
+    function getUser() {
+
+        let userBody = `<tr>
+                        <td>[[${userId}]]</td>
+                        <td>[[${#authentication.name}]]</td>
+                    </tr>`;
+
+        document.getElementById("user-table-body").innerHTML = userBody;
+
+    }
+
+
+    function getUserFavoriteBooks() {
+        const userId=[[${userId}]];
+        fetch('/api/v1/users/' + userId + '/favorites/books', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then((json) => {
+            let bookList = "";
+            json.forEach((book) => {
+
+                bookList += `<tr>
+                             <td>${book.bookId} </td>
+                             <td>
+                             <a href="/books/${book.bookId}">
+                             <button type="button">[[#{book-info-button-caption}]]</button>
+                             </a>
+                            <button type="button" onclick="deleteUserFavoriteBook(${book.userId}, ${book.bookId})"> [[#{delete-button-caption}]]</button>
+                            </td>
+                            </tr>
+                `;
+            });
+            document.getElementById("user-favorite-books-body").innerHTML = bookList;
+        });
+    }
+
+	function deleteUserFavoriteBook(userId, bookId) {
+        fetch("/api/v1/users/" + userId +"/favorites/books/" + bookId, {
+             method: 'DELETE',
+             headers: {
+                'Content-Type': 'application/json'
+             }
+        })
+        .then(response => location.reload())
+        .catch(error => alert("Ошибка" + error));
+    }
+
+    function getUserBookRatings() {
+        const userId=[[${userId}]];
+        fetch('/api/v1/users/' + userId + '/ratings/books', {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json"
+            }
+        })
+        .then(response => response.json())
+        .then((json) => {
+            let ratingList = "";
+            json.forEach((rating) => {
+
+            ratingList += `<tr>
+                            <td>${rating.bookId} </td>
+                            <td>${rating.rating}</td>
+                            <td>
+                                <a href="/users/${rating.userId}/ratings/books/${rating.bookId}/editing-form">
+                                    <button type="button">[[#{edit-button-caption}]]</button>
+                                </a>
+                            <button type="button" onclick="deleteUserBookRating(${rating.userId}, ${rating.bookId})"> [[#{delete-button-caption}]]</button>
+                            </td>
+                        </tr>`;
+            });
+        document.getElementById("user-book-ratings-body").innerHTML = ratingList;
+        });
+    }
+
+	function deleteUserBookRating(userId, bookId) {
+        fetch("/api/v1/users/" + userId +"/ratings/books/" + bookId, {
+             method: 'DELETE',
+             headers: {
+                'Content-Type': 'application/json'
+             }
+        })
+        .then(response => location.reload())
+        .catch(error => alert("Ошибка" + error));
+    }
+</script>
+</html>
